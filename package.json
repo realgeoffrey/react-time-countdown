@@ -1,0 +1,77 @@
+{
+  "name": "react-time-countdown",
+  "description": "倒计时（React组件）",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:realgeoffrey/react-time-countdown.git"
+  },
+  "keywords": [
+    "react",
+    "countdowntimer",
+    "countdown-timer"
+  ],
+  "author": "realgeoffrey",
+  "license": "MIT",
+  "homepage": "https://github.com/realgeoffrey/react-time-countdown#readme",
+  "bugs": {
+    "url": "https://github.com/realgeoffrey/react-time-countdown/issues"
+  },
+  "main": "dist/index.js",
+  "module": "dist/react-time-countdown.esm.js",
+  "unpkg": "dist/react-time-countdown.umd.production.min.js",
+  "jsdelivr": "dist/react-time-countdown.umd.production.min.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch --format cjs,esm,umd",
+    "build": "tsdx build --format cjs,esm,umd",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "size-limit": [
+    {
+      "path": "dist/react-time-countdown.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/react-time-countdown.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^6.0.4",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "husky": "^7.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "size-limit": "^6.0.4",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
+  },
+  "version": "1.0.0"
+}
