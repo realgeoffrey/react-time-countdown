@@ -19,8 +19,8 @@ React的倒计时组件
 
     ```html
     <!-- 需要先引入react技术栈：
-        <script src='//unpkg.com/react@17/umd/react.production.min.js' ></script>
-        <script src='//unpkg.com/react-dom@17/umd/react-dom.production.min.js'></script>
+        <script src='//unpkg.com/react@18/umd/react.production.min.js' ></script>
+        <script src='//unpkg.com/react-dom@18/umd/react-dom.production.min.js'></script>
 
         <script src='//unpkg.com/babel-standalone@6/babel.min.js'></script>
     -->
