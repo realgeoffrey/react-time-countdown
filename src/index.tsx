@@ -1,83 +1,65 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { SET_INTERVAL, GET_REST_TIME } from './utils';
 
 interface PropsType {
   deadlineTimestamp: number; // 结束时间戳
 
-  leftSecond?: number; // 提前到期（秒，默认：0）
+  leftMillisecond?: number; // 提前到期（毫秒，默认：0）
 
   callback?: Function; // 倒计时结束后回调
-  renderSecond?: (second: number) => React.ReactNode; // 渲染倒计时（秒）
+  renderMillisecond?: (millisecond: number) => React.ReactNode; // 渲染倒计时（毫秒）
+
+  intervalDelay?: number; // 每次调用渲染的间隔时间（毫秒，默认：1000）
 }
-
-// 周期执行（构造函数）
-const SET_INTERVAL = function (
-  this: { stop: Function },
-  func: Function,
-  millisecond: number
-) {
-  let setIntervalId: ReturnType<typeof setTimeout>;
-  if (typeof func === 'function') {
-    setIntervalId = setTimeout(function self() {
-      setIntervalId = setTimeout(self, millisecond);
-      func();
-    }, millisecond);
-  }
-  this.stop = () => {
-    clearTimeout(setIntervalId);
-  };
-  return this;
-};
-
-// 获取剩余时间（秒）
-const GET_REST_TIME = (deadlineTimestamp: number): number => {
-  return Math.max(Math.round((deadlineTimestamp - Date.now()) / 1000), 0);
-};
 
 export const Thing = function (props: PropsType) {
   const {
     deadlineTimestamp,
-    leftSecond: _leftSecond = 0,
+    leftMillisecond: _leftMillisecond = 0,
     callback,
-    renderSecond,
+    renderMillisecond,
+    intervalDelay = 1000,
   } = props;
 
-  const leftSecond = Math.max(_leftSecond, 0);
+  const leftMillisecond = Math.max(_leftMillisecond, 0);
 
   // 每秒执行（实例）
-  const setIntervalInstance = useRef<
-    ReturnType<typeof SET_INTERVAL> | { stop: Function }
-  >({ stop: () => {} });
+  const setIntervalInstance = useRef<SET_INTERVAL | { stop: Function }>({
+    stop: () => {},
+  });
 
   useEffect(() => {
-    // 倒计时时间（秒）
+    // 倒计时时间（毫秒）
     const restTime = GET_REST_TIME(deadlineTimestamp);
 
     setRestTotalSecond(restTime);
 
-    if (restTime > leftSecond) {
+    if (restTime > leftMillisecond) {
       setIntervalInstance.current.stop();
 
-      setIntervalInstance.current = new (SET_INTERVAL as any)(() => {
+      setIntervalInstance.current = new SET_INTERVAL(() => {
         setRestTotalSecond(GET_REST_TIME(deadlineTimestamp));
 
-        if (GET_REST_TIME(deadlineTimestamp) <= leftSecond) {
+        if (GET_REST_TIME(deadlineTimestamp) <= leftMillisecond) {
           setIntervalInstance.current.stop();
 
           callback && callback();
         }
-      }, 1000);
+      }, intervalDelay);
     }
 
     return () => {
       setIntervalInstance.current.stop();
     };
-  }, [deadlineTimestamp, leftSecond, callback]);
+  }, [deadlineTimestamp, leftMillisecond, callback, intervalDelay]);
 
   const [restTotalSecond, setRestTotalSecond] = useState<number>(
     GET_REST_TIME(deadlineTimestamp)
   );
 
-  return <>{renderSecond ? renderSecond(restTotalSecond) : restTotalSecond}</>;
+  return renderMillisecond
+    ? renderMillisecond(restTotalSecond)
+    : restTotalSecond;
 };
 
 export default Thing;

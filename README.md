@@ -39,11 +39,12 @@ React的倒计时组件
   callback={() => {
     // 倒计时结束时执行的回调函数
   }}
-  leftSecond={提前到期的秒数（0）}
-  renderSecond={(second: number): React.ReactNode => {
-    // 参数：倒计时还剩下多少秒
+  leftMillisecond={提前到期的毫秒数（0）}
+  renderMillisecond={(millisecond: number): React.ReactNode => {
+    // 参数：倒计时还剩下多少毫秒
     // 返回：渲染本组件
   }}
+  intervalDelay={每次调用渲染的间隔时间，毫秒（1000）}
 />
 ```
 
