@@ -12,7 +12,7 @@
     <script src="//unpkg.com/babel-standalone@6/babel.min.js"></script>
 
     <script src="//unpkg.com/react-time-countdown"></script>
-    <!-- <script src="../dist/react-time-countdown.umd.production.min.js"></script> -->
+    <!--<script src="../dist/react-time-countdown.umd.production.min.js"></script>-->
 
     <script type="text/babel">
       const TimeCountdown = window['react-time-countdown'].default;
@@ -23,7 +23,6 @@
         return (
           <div>
             <h3>倒计时</h3>
-
             <TimeCountdown
               deadlineTimestamp={deadline}
               callback={() => {
@@ -45,9 +44,8 @@
               }}
               intervalDelay={1000}
             />
-
+            毫秒
             <hr />
-
             <div>
               设置结束时间戳：
               <div

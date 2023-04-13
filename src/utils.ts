@@ -4,7 +4,7 @@ export class SET_INTERVAL {
 
   constructor(func: Function, millisecond: number) {
     let setIntervalId: ReturnType<typeof setTimeout>;
-    if (typeof func === 'function') {
+    if (typeof func === "function") {
       setIntervalId = setTimeout(function self() {
         setIntervalId = setTimeout(self, millisecond);
         func();

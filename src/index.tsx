@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { SET_INTERVAL, GET_REST_TIME } from './utils';
+import React, { useEffect, useRef, useState } from "react";
+import { SET_INTERVAL, GET_REST_TIME } from "./utils";
 
 interface PropsType {
   deadlineTimestamp: number; // 结束时间戳
@@ -12,20 +12,20 @@ interface PropsType {
   intervalDelay?: number; // 每次调用渲染的间隔时间（毫秒，默认：1000）
 }
 
-export const Thing = function (props: PropsType) {
+export const Thing = function(props: PropsType) {
   const {
     deadlineTimestamp,
     leftMillisecond: _leftMillisecond = 0,
     callback,
     renderMillisecond,
-    intervalDelay = 1000,
+    intervalDelay = 1000
   } = props;
 
   const leftMillisecond = Math.max(_leftMillisecond, 0);
 
   // 每秒执行（实例）
-  const setIntervalInstance = useRef<SET_INTERVAL | { stop: Function }>({
-    stop: () => {},
+  const setIntervalInstance = useRef<SET_INTERVAL>({
+    stop: () => {}
   });
 
   useEffect(() => {
@@ -53,13 +53,9 @@ export const Thing = function (props: PropsType) {
     };
   }, [deadlineTimestamp, leftMillisecond, callback, intervalDelay]);
 
-  const [restTotalSecond, setRestTotalSecond] = useState<number>(
-    GET_REST_TIME(deadlineTimestamp)
-  );
+  const [restTotalSecond, setRestTotalSecond] = useState<number>(GET_REST_TIME(deadlineTimestamp));
 
-  return renderMillisecond
-    ? renderMillisecond(restTotalSecond)
-    : restTotalSecond;
+  return <>{renderMillisecond ? renderMillisecond(restTotalSecond) : restTotalSecond}</>;
 };
 
 export default Thing;
