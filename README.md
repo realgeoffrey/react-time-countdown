@@ -1,9 +1,11 @@
 # react-time-countdown
 
+[![NPM Version](https://img.shields.io/npm/v/react-time-countdown)](https://www.npmjs.com/package/react-time-countdown)
+![React](https://img.shields.io/badge/React-_>=16.8.0-58c4dc)
+
 React的倒计时组件
 
-1. npm：<https://www.npmjs.com/package/react-time-countdown>
-2. demo：<https://realgeoffrey.github.io/react-time-countdown/demo/index.html>
+demo：<https://realgeoffrey.github.io/react-time-countdown/demo/index.html>
 
 ### 安装-引用
 1. Node.js
